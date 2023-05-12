@@ -1,0 +1,15 @@
+C:\Users\Prana\OneDrive\Documents\GitHub\Private-Projects\Learning\C#\BrakeysTutorial\bin\Debug\net7.0\BrakeysTutorial.exe
+C:\Users\Prana\OneDrive\Documents\GitHub\Private-Projects\Learning\C#\BrakeysTutorial\bin\Debug\net7.0\BrakeysTutorial.deps.json
+C:\Users\Prana\OneDrive\Documents\GitHub\Private-Projects\Learning\C#\BrakeysTutorial\bin\Debug\net7.0\BrakeysTutorial.runtimeconfig.json
+C:\Users\Prana\OneDrive\Documents\GitHub\Private-Projects\Learning\C#\BrakeysTutorial\bin\Debug\net7.0\BrakeysTutorial.dll
+C:\Users\Prana\OneDrive\Documents\GitHub\Private-Projects\Learning\C#\BrakeysTutorial\bin\Debug\net7.0\BrakeysTutorial.pdb
+C:\Users\Prana\OneDrive\Documents\GitHub\Private-Projects\Learning\C#\BrakeysTutorial\obj\Debug\net7.0\BrakeysTutorial.csproj.AssemblyReference.cache
+C:\Users\Prana\OneDrive\Documents\GitHub\Private-Projects\Learning\C#\BrakeysTutorial\obj\Debug\net7.0\BrakeysTutorial.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Prana\OneDrive\Documents\GitHub\Private-Projects\Learning\C#\BrakeysTutorial\obj\Debug\net7.0\BrakeysTutorial.AssemblyInfoInputs.cache
+C:\Users\Prana\OneDrive\Documents\GitHub\Private-Projects\Learning\C#\BrakeysTutorial\obj\Debug\net7.0\BrakeysTutorial.AssemblyInfo.cs
+C:\Users\Prana\OneDrive\Documents\GitHub\Private-Projects\Learning\C#\BrakeysTutorial\obj\Debug\net7.0\BrakeysTutorial.csproj.CoreCompileInputs.cache
+C:\Users\Prana\OneDrive\Documents\GitHub\Private-Projects\Learning\C#\BrakeysTutorial\obj\Debug\net7.0\BrakeysTutorial.dll
+C:\Users\Prana\OneDrive\Documents\GitHub\Private-Projects\Learning\C#\BrakeysTutorial\obj\Debug\net7.0\refint\BrakeysTutorial.dll
+C:\Users\Prana\OneDrive\Documents\GitHub\Private-Projects\Learning\C#\BrakeysTutorial\obj\Debug\net7.0\BrakeysTutorial.pdb
+C:\Users\Prana\OneDrive\Documents\GitHub\Private-Projects\Learning\C#\BrakeysTutorial\obj\Debug\net7.0\BrakeysTutorial.genruntimeconfig.cache
+C:\Users\Prana\OneDrive\Documents\GitHub\Private-Projects\Learning\C#\BrakeysTutorial\obj\Debug\net7.0\ref\BrakeysTutorial.dll
