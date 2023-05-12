@@ -95,9 +95,7 @@ int main() {
     // && is logical and: returns true only if both statements are true
     // || is locical or: returns true if either statements are true
     // ! is logical not: returns false if result is true
-
-  //string concatenation
-
+ 
   //user input
   int userInput;
   cin >> userInput;
