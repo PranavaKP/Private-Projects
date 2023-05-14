@@ -29,22 +29,6 @@ int main(){
     txt[0] = 'J';
 
     // backslash escape characters: \' for single quotes in strings, \" for double quotes in strings, \\ for backslash in strings, 
-
-    //math functions * need to use #include <cmath> *
-    cout << abs(-5);
-    cout << acos(30);
-    cout << asin(30);
-    cout << atan(30);
-    cout << cbrt(36);
-    cout << ceil(3.9);
-    cout << cos(30);
-    cout << sin(30);
-    cout << tan(30);
-    cout << cosh(30);
-    cout << exp(5);
-    cout << expm1(5);
-    cout << fabs(5.5);
     
-
     return 0;
 }

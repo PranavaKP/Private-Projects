@@ -2,18 +2,22 @@
 line 3, then use std:: before some objects such as cout*/
 #include <iostream>
 using namespace std;
+
 //for using strings
 #include<string>
 
-/*a function that is automatically executed when program starts*/
+//write code for global variables above main function
+//write code for functions above main function unlike javascript
+
+/*main is a function that is automatically executed when program starts*/
 int main() {
+  
   /*cout = an object with the insertion opperator, 
   <<, to output/print stuff*/
   cout << "Hello World!";
 
-  /* \n = new line, 
-  so next output is started on next line
-  if \n\n then a blank line is created
+  /* \n = new line, so next output is started on next line
+  \n\n then a blank line is created
   instead of \n, end1 can be used */
   cout << "Bonjour\n";
   cout << "Hi";
@@ -61,40 +65,6 @@ int main() {
   cout << a; // so a = "A"
   cout << b; // so b = "B"
   cout << c; // so c = "C"
-
-  //arithmetic opperators
-  int ariOpp1 = 1;
-  int ariOpp2 = 2;
-  cout << ariOpp1 + ariOpp2; // addition
-  cout << ariOpp1 - ariOpp2; // subtraction
-  cout << ariOpp1 * ariOpp2; // multiplication
-  cout << ariOpp1 / ariOpp2; // division
-  cout << ariOpp1 % ariOpp2; // modulus/mod
-  cout << ++ariOpp1; //increases a value by one
-  cout << --ariOpp2; //decreases a value by one
-
-  /*assignment opparators, cant be used like
-  cout << x = 5; */
-  int x = 5; // equal
-  cout << x;
-  x += 3; // adds a number(3)
-  cout << x; 
-  //other opperators include: -= , *=, /=, %/, &/, |/, ^=, >>=, <<= 
-
-  //comparison opperators
-  bool x = (5 == 3); // checks if equal to
-  cout << x;
-  /*other comparison opperators:
-  != checks if not equal to, 
-  > checks if greater than,
-  < checks if less than
-  >= greater than or equal
-  <= less than or equal*/
-
-  //logic opperations
-    // && is logical and: returns true only if both statements are true
-    // || is locical or: returns true if either statements are true
-    // ! is logical not: returns false if result is true
  
   //user input
   int userInput;
