@@ -11,6 +11,26 @@ int c;
 int rootOne;
 int rootTwo;
 
+//declare functions
+void startUpFunction();
+void calculateFunction();
+
+
+int main(){
+    cout << "This is a program that calculates the real roots of a quadratic function\n";
+    startUpFunction();
+    if(yesNo == 'Y'){
+        calculateFunction();
+    }else if(yesNo == 'N'){
+        startUpFunction();
+    }else{
+        cout << "Error! Resetting!";
+        startUpFunction();
+    }
+    return 0;
+}
+
+//functions
 void startUpFunction(){
   cout << "Please enter in the coffeciant of the x^2 term\n";
   cin >> a;
@@ -30,23 +50,8 @@ void calculateFunction(){
   if(!(d < 0)){
     rootOne = ((-b + sqrt(d))/(2*a));
     rootTwo = ((-b - sqrt(d))/(2*a));
-    cout << "The first root is:" << rootOne << "\nThe second root is:" << rootTwo;
+    cout << "The first root is:" << rootOne << "\nThe second root is:" << rootTwo << "\n";
   }else{
     cout << "This equation has no real roots!!!";
   }
-  cout << "\nStarting calculation for next problem!!!\n";
-  startUpFunction();
-}
-
-int main(){
-    cout << "This is a program that calculates the real roots of a quadratic function\n";
-    startUpFunction();
-    if(yesNo == 'Y'){
-        calculateFunction();
-    }else if(yesNo == 'N'){
-        startUpFunction();
-    }else{
-        cout << "Error! Resetting!";
-        startUpFunction();
-    }
 }
