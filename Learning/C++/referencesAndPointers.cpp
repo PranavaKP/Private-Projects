@@ -13,4 +13,6 @@ int main(){
     string hello = "Bonjour";
     cout << &hello; // outputs the memory address of the variable hello in hexadecimal
 
+    
+
 }
