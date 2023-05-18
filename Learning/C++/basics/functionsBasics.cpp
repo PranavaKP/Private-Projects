@@ -10,11 +10,6 @@ int num2 = 10;
 //define and declare functions above main
 
 //basic function
-/*format:
-    type functionName(){
-
-    }
-*/
 //example:
 void addTwoNumbers(){
     cout << num1 + num2;
@@ -22,21 +17,11 @@ void addTwoNumbers(){
 
 //functions with parameters: args are passed through parameters which are used in function, the parameters have to be defined with a type in the function
 //example:
-/*format:
-    type functionName(type param1){
-        
-    }
-*/
 void subtractTwoNumbers(int numberOne, int numberTwo){
     cout << numberOne - numberTwo;
 }
 
 //functions with return values: returns a certain output(can be stored in a variable), the type of the function should be the same as the type of the return value, so no void
-/*format:
-    type functionName(){
-        return ____;
-    }
-*/
 //example:
 int multiplyTwoNumbers(int numberOne, int numberTwo){
     return numberOne*numberTwo; // returns the multiple of numberOne and numberTwo

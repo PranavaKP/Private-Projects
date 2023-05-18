@@ -5,15 +5,9 @@ using namespace std;
 
 //create classes here: classes are a user defined data type that can be used in a program
 //kinda like structs but structs are public by default but classes are private by default
+//also, structs only store user defined data types, but a lot more can be done with classes
 
 //creating a class
-/*format:
-class className {
-    accessSpecifier: // specifies access either public or private
-    variable 1; //attribute
-    variable 2; //attribute
-}
-*/
 //example:
 class myClass{
     public:
@@ -23,9 +17,6 @@ class myClass{
 
 //creating an object: can be created anywhere like a variable: better to create it inside main
 //multiple objects of a class can be created
-/*format:
-className objectName;
-*/
 //example:
 myClass myObjOutside;
 
