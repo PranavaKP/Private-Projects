@@ -6,8 +6,8 @@ using namespace std;
 //access specifiers: specify the access of attributes/members
 //by default all attributes/members are private in classes while public in structures
     //public --> the members/attributes are accessable outside the class
-    //private --> not accessable/viewable outside the class
-    //protected --> no accessable/viewable oustide the class but can be accessed in inherited classes
+    //private --> not accessable/viewable outside the class but still usable inside of class
+    //protected --> no accessable/viewable oustide the class but can be accessed in inherited classes and the class where it is created in
 
 class myClass{
     public: 
