@@ -20,7 +20,7 @@ int main(){
     cout << x;
     x += 3; // adds a number(3)
     cout << x; 
-    //other opperators include: -= , *=, /=, %/, &/, |/, ^=, >>=, <<= 
+    //other opperators include: -= , *=, /=, %=, &=, |=, ^=, >>=, <<= 
 
     //comparison opperators, used for boolean expressions
     cout << (5 == 3); // checks if equal to

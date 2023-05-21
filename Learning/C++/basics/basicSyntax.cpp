@@ -57,14 +57,21 @@ int main() {
   //bool: if true = 1 as output; if false = 0 as output
   bool trueEx = true;
   bool falseEx = false;
-  cout << trueEx;
-  cout << falseEx;
+  cout << trueEx << "\n" << falseEx;
+  bool trueEx2 = 1;
+  bool falseEx2 = 0;
+  cout << trueEx2 << "\n" << falseEx2;
 
+  //char normal
+  char a = 'A';
+  char b = 'B';
+  char c = 'C';
+  
   //char for ASCII values
-  char a = 65, b = 66, c = 67;
-  cout << a; // so a = "A"
-  cout << b; // so b = "B"
-  cout << c; // so c = "C"
+  char a2 = 65, b2 = 66, c2 = 67;
+  cout << a2; // so a = "A"
+  cout << b2; // so b = "B"
+  cout << c2; // so c = "C"
  
   //user input
   int userInput;
