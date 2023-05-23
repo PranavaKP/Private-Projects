@@ -13,6 +13,12 @@ void playerOneTurn();
 void playerTwoTurn();
 string checkGameResult();
 
+struct{
+    string names[9] = {"A1", "B1", "C1", "A2", "B2", "C2", "A3", "B3", "C3"};
+    int i[9] = {0, 0, 0, 1, 1, 1, 2, 2, 2};
+    int j[9] = {0, 1, 2, 0, 1, 2, 0, 1, 2};
+} spacerNames;
+
 int main(){
     cout << "Please enter the name of Player One! Player One will have the first turn. \n";
     cin >> playerOne;
@@ -29,7 +35,7 @@ int main(){
 }
 
 void printBoard(){
-    cout << "\nTick Tack Toe: \n\n";
+    cout << "\nTick Tack Toe Board: \n\n";
     cout << "    A  B  C \n";
     for(int i = 0; i < 3; i++){
         for(int j = 0; j < 3; j++){
@@ -46,78 +52,99 @@ void printBoard(){
 
 void playerOneTurn(){
     string inputSpace;
+    int i;
+    int j;
     cout << "\n" + playerOne + ", it is your turn to make a move!\n";
     cin >> inputSpace;
-    if(inputSpace == "A1" && tickTackToeBoard[0][0] == " _ "){
-        tickTackToeBoard[0][0] = " X ";
-    }else if(inputSpace == "B1" && tickTackToeBoard[0][1] == " _ "){
-        tickTackToeBoard[0][1] = " X ";
-    }else if(inputSpace == "C1" && tickTackToeBoard[0][2] == " _ "){
-        tickTackToeBoard[0][2] = " X ";
-    }else if(inputSpace == "A2" && tickTackToeBoard[1][0] == " _ "){
-        tickTackToeBoard[1][0] = " X ";
-    }else if(inputSpace == "B2" && tickTackToeBoard[1][1] == " _ "){
-        tickTackToeBoard[1][1] = " X ";
-    }else if(inputSpace == "C2" && tickTackToeBoard[1][2] == " _ "){
-        tickTackToeBoard[1][2] = " X ";
-    }else if(inputSpace == "A3" && tickTackToeBoard[2][0] == " _ "){
-        tickTackToeBoard[2][0] = " X ";
-    }else if(inputSpace == "B3" && tickTackToeBoard[2][1] == " _ "){
-        tickTackToeBoard[2][1] = " X ";
-    }else if(inputSpace == "C3" && tickTackToeBoard[2][2] == " _ "){
-        tickTackToeBoard[2][2] = " X ";
+    
+    for(int x = 0; x < 9; x++){
+        if(spacerNames.names[x] == inputSpace){
+            i = spacerNames.i[x];
+            j = spacerNames.j[x];
+        }
+    }
+    
+    if(tickTackToeBoard[i][j] == " _ "){
+        tickTackToeBoard[i][j] = " X ";
     }else{
-        cout << "You have entered an invalid space. Please try again!\n";
+        cout << "\nYou have entered an invalid space. Please try again!\n";
         playerOneTurn();
     }
 
+    printBoard();
     if(checkGameResult() == "Win"){
         cout << playerOne + " wins the game!!!\n";
     }else if(checkGameResult() == "Draw"){
         cout << "This game is a draw!!!\n";
     }else{
-        printBoard();
         playerTwoTurn();
     }
 }
 
 void playerTwoTurn(){
     string inputSpace;
+    int i;
+    int j;
+    
     cout << "\n" + playerTwo + ", it is your turn to make a move!\n";
     cin >> inputSpace;
-    if(inputSpace == "A1" && tickTackToeBoard[0][0] == " _ "){
-        tickTackToeBoard[0][0] = " O ";
-    }else if(inputSpace == "B1" && tickTackToeBoard[0][1] == " _ "){
-        tickTackToeBoard[0][1] = " O ";
-    }else if(inputSpace == "C1" && tickTackToeBoard[0][2] == " _ "){
-        tickTackToeBoard[0][2] = " O ";
-    }else if(inputSpace == "A2" && tickTackToeBoard[1][0] == " _ "){
-        tickTackToeBoard[1][0] = " O ";
-    }else if(inputSpace == "B2" && tickTackToeBoard[1][1] == " _ "){
-        tickTackToeBoard[1][1] = " O ";
-    }else if(inputSpace == "C2" && tickTackToeBoard[1][2] == " _ "){
-        tickTackToeBoard[1][2] = " O ";
-    }else if(inputSpace == "A3" && tickTackToeBoard[2][0] == " _ "){
-        tickTackToeBoard[2][0] = " O ";
-    }else if(inputSpace == "B3" && tickTackToeBoard[2][1] == " _ "){
-        tickTackToeBoard[2][1] = " O ";
-    }else if(inputSpace == "C3" && tickTackToeBoard[2][2] == " _ "){
-        tickTackToeBoard[2][2] = " O ";
+    
+    for(int x = 0; x < 9; x++){
+        if(spacerNames.names[x] == inputSpace){
+            i = spacerNames.i[x];
+            j = spacerNames.j[x];
+        }
+    }
+    
+    if(tickTackToeBoard[i][j] == " _ "){
+        tickTackToeBoard[i][j] = " O ";
     }else{
-        cout << "You have entered an invalid space. Please try again!\n";
+        cout << "\nYou have entered an invalid space. Please try again!\n";
         playerTwoTurn();
     }
 
+    printBoard();
     if(checkGameResult() == "Win"){
         cout << playerTwo + " wins the game!!!\n";
     }else if(checkGameResult() == "Draw"){
         cout << "This game is a draw!!!\n";
     }else{
-        printBoard();
         playerOneTurn();
     }
 }
 
 string checkGameResult(){
-    return "idk";
+    string status;
+    for(int i = 0; i < 3; i++){
+        if(tickTackToeBoard[i][0] == tickTackToeBoard[i][1] && tickTackToeBoard[i][0] == tickTackToeBoard[i][2] && tickTackToeBoard[i][0] != " _ "){
+            status = "Win";
+        }
+    }
+    for(int j = 0; j < 3; j++){
+        if(tickTackToeBoard[0][j] == tickTackToeBoard[1][j] && tickTackToeBoard[0][j] == tickTackToeBoard[2][j] && tickTackToeBoard[0][j] != " _ "){
+            status = "Win";
+        }
+    }
+    if(tickTackToeBoard[0][0] == tickTackToeBoard[1][1] && tickTackToeBoard[0][0] == tickTackToeBoard[2][2] && tickTackToeBoard[0][0] != " _ "){
+        status = "Win";
+    }
+    if(tickTackToeBoard[0][3] == tickTackToeBoard[1][2] && tickTackToeBoard[0][3] == tickTackToeBoard[2][2] && tickTackToeBoard[0][0] != " _ "){ 
+
+    }
+    if(status != "Win"){
+        for(int i = 0; i < 3; i++){
+            for(int j = 0; j < 3; j++){
+                if(tickTackToeBoard[i][j] == " _ "){
+                    status = "Not Over";
+                    break;
+                }else{
+                    status = "Draw";
+                }
+            }
+        }
+    }
+
+    return status;
+
+
 }
