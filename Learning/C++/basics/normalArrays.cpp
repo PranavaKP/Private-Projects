@@ -48,8 +48,10 @@ int main(){
     sizeof() returns the size of a type in bytes so sizeof(array) would result in the size of the array in bytes
     to get number of elements in an array: divide that by the sizeof the element type in bytes
     the number of elemetents in the list can be used to loop through an array, but one can use a foreach loop instead*/
+    
     string randomDataset[] = {"hello", "hi"};
     int length = sizeof(randomDataset) / sizeof(string);
+    
     cout << length;
     for(int i = 0; i < length; i++){
         cout << randomDataset[i];

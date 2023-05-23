@@ -66,7 +66,7 @@ int main(){
     //ex:    
     for (int i = 0; i < 10; i++) {
     if (i == 4) {
-        break;
+        continue;
     }
     cout << i << "\n";
     }
