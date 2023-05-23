@@ -8,17 +8,12 @@ string playerOne;
 string playerTwo;
 string tickTackToeBoard[3][3];
 
-void startUp();
 void printBoard();
 void playerOneTurn();
 void playerTwoTurn();
-void checkGameResult();
+string checkGameResult();
 
 int main(){
-    startUp();
-}
-
-void startUp(){
     cout << "Please enter the name of Player One! Player One will have the first turn. \n";
     cin >> playerOne;
     cout << "Please enter the name of Player Two! \n";
@@ -28,12 +23,13 @@ void startUp(){
             tickTackToeBoard[i][j] = " _ ";
         }
     }
-    cout << "\nTick Tack Toe: \n\n";
     printBoard();   
     playerOneTurn();
-};
+    return 0;
+}
 
 void printBoard(){
+    cout << "\nTick Tack Toe: \n\n";
     cout << "    A  B  C \n";
     for(int i = 0; i < 3; i++){
         for(int j = 0; j < 3; j++){
@@ -71,11 +67,18 @@ void playerOneTurn(){
     }else if(inputSpace == "C3" && tickTackToeBoard[2][2] == " _ "){
         tickTackToeBoard[2][2] = " X ";
     }else{
-        cout << "You have entered an invalid space. Your turn is being skipped.\n";
+        cout << "You have entered an invalid space. Please try again!\n";
+        playerOneTurn();
     }
 
-    printBoard();
-    playerTwoTurn();
+    if(checkGameResult() == "Win"){
+        cout << playerOne + " wins the game!!!\n";
+    }else if(checkGameResult() == "Draw"){
+        cout << "This game is a draw!!!\n";
+    }else{
+        printBoard();
+        playerTwoTurn();
+    }
 }
 
 void playerTwoTurn(){
@@ -101,9 +104,20 @@ void playerTwoTurn(){
     }else if(inputSpace == "C3" && tickTackToeBoard[2][2] == " _ "){
         tickTackToeBoard[2][2] = " O ";
     }else{
-        cout << "You have entered an invalid space. Your turn is being skipped.\n";
+        cout << "You have entered an invalid space. Please try again!\n";
+        playerTwoTurn();
     }
 
-    printBoard();
-    playerOneTurn();
+    if(checkGameResult() == "Win"){
+        cout << playerTwo + " wins the game!!!\n";
+    }else if(checkGameResult() == "Draw"){
+        cout << "This game is a draw!!!\n";
+    }else{
+        printBoard();
+        playerOneTurn();
+    }
+}
+
+string checkGameResult(){
+    return "idk";
 }
