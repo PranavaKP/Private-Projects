@@ -3,18 +3,27 @@ using namespace std;
 #include <string>
 #include <cmath>
 
+//objects and classes
 class BoardPieces{
     public:
         string pieceName;
         string color;
+        string type;
         int possibleI;
         int possibleJ;
-        BoardPieces(string x, string y){
+        BoardPieces(string x, string y, string z){
             pieceName = x;
             color = y;
+            type = z;
         }
-        void movementCheck(int i, int j){
+        void blackMovementCheck(int i, int j){
             //empty check
+        }
+        void whiteMovementCheck(int i, int j){
+            //empty check
+        }
+        void commonMovementCheck(int i, int j){
+
         }
 };
 
@@ -22,19 +31,33 @@ class Pawn : public BoardPieces{
     public:
         int possibleI[3];
         int possibleJ[3];
-        void movementCheck(int i, int j){
-            if(chessBoard[i+1][j] == " ___ "){
+        void blackMovementCheck(int i, int j){
+            if(chessBoard[i+1][j] == " __ "){
                 possibleI[0] = i + 1;
                 possibleJ[0] = j;
             }
-            if(chessBoard[i+1][j+1] != " ___ "){
+            if(chessBoard[i+1][j+1] != " __ "){
                 possibleI[1] = i+1;
                 possibleJ[1] = j+1;
             }
-            if(chessBoard[i+1][j-1] != " ___ "){
+            if(chessBoard[i+1][j-1] != " __ "){
                 possibleI[2] = i+1;
                 possibleJ[2] = j-1;
             }
+        }
+        void whiteMovementCheck(int i, int j){
+            if(chessBoard[i-1][j] == " __ "){
+                possibleI[0] = i - 1;
+                possibleJ[0] = j;
+            }
+            if(chessBoard[i-1][j+1] != " __ "){
+                possibleI[1] = i-1;
+                possibleJ[1] = j+1;
+            }
+            if(chessBoard[i-1][j-1] != " __ "){
+                possibleI[2] = i-1;
+                possibleJ[2] = j-1;
+            }  
         }
 };
 
@@ -42,15 +65,15 @@ class Rook  : public BoardPieces{
     public:
         int possibleI[14];
         int possibleJ[14];
-        void movementCheck(int i, int j){
+        void commonMovementCheck(int i, int j){
             for(int x = 0; x < 7; x++){
-                if(x != i &&  chessBoard[x][j] == " ___ "){
+                if(x != i &&  chessBoard[x][j] == " __ "){
                     possibleI[x] = x;
                     possibleJ[x] = j;
                 }
             }
             for(int y = 7; y < 14; y++){
-                if(y != j &&  chessBoard[i][y] == " ___ "){
+                if(y != j &&  chessBoard[i][y] == " __ "){
                     possibleI[y] = i;
                     possibleJ[y] = y;
                 }
@@ -60,7 +83,7 @@ class Rook  : public BoardPieces{
 
 class Knight  : public BoardPieces{
     public:
-        void movementCheck(int i, int j){
+        void commonMovementCheck(int i, int j){
             int possibleI[8];
             int possibleJ[8];
             if(i+2 >= 0 && i+2 < 8 && j+1 >= 0 && j+1 < 8){
@@ -100,31 +123,36 @@ class Knight  : public BoardPieces{
 
 class Bishop  : public BoardPieces{
     public:
-        void movementCheck(int i, int j){
-            int possibleI[];
-            int possibleJ[];
+        void commonMovementCheck(int i, int j){
+            int possibleI[13];
+            int possibleJ[13];
+            int index = 0;
             for(int x = i; i > 0; i--){
                 for(int y = j; j > 0; j--){
-
-
+                    possibleI[index] = x;
+                    possibleJ[index] = y;
+                    index++;
                 }
             }
             for(int x = i; i > 0; i--){
                 for(int y = j; j < 7; j++){
-                    
-
+                    possibleI[index] = x;
+                    possibleJ[index] = y;
+                    index++;  
                 }
             }
             for(int x = i; i < 7; i++){
                 for(int y = j; j > 0; j--){
-                    
-
+                    possibleI[index] = x;
+                    possibleJ[index] = y;
+                    index++;
                 }
             }
             for(int x = i; i < 7; i++){
                 for(int y = j; j < 7; j++){
-                    
-
+                    possibleI[index] = x;
+                    possibleJ[index] = y;
+                    index++;
                 }
             }
         }
@@ -132,23 +160,52 @@ class Bishop  : public BoardPieces{
 
 class Queen  : public BoardPieces{
     public:
-        int possibleI[];
-        int possibleJ[];
-        void movementCheck(int i, int j){
+        int possibleI[27];
+        int possibleJ[27];
+        int index = 0;
+        void commonMovementCheck(int i, int j){
             //rook movement
             for(int x = 0; x < 7; x++){
-                if(x != i &&  chessBoard[x][j] == " ___ "){
+                if(x != i &&  chessBoard[x][j] == " __ "){
                     possibleI[x] = x;
                     possibleJ[x] = j;
                 }
             }
             for(int y = 7; y < 14; y++){
-                if(y != j &&  chessBoard[i][y] == " ___ "){
+                if(y != j &&  chessBoard[i][y] == " __ "){
                     possibleI[y] = i;
                     possibleJ[y] = y;
                 }
             }
             //bishop movement
+            for(int x = i; i > 0; i--){
+                for(int y = j; j > 0; j--){
+                    possibleI[index] = x;
+                    possibleJ[index] = y;
+                    index++;
+                }
+            }
+            for(int x = i; i > 0; i--){
+                for(int y = j; j < 7; j++){
+                    possibleI[index] = x;
+                    possibleJ[index] = y;
+                    index++;  
+                }
+            }
+            for(int x = i; i < 7; i++){
+                for(int y = j; j > 0; j--){
+                    possibleI[index] = x;
+                    possibleJ[index] = y;
+                    index++;
+                }
+            }
+            for(int x = i; i < 7; i++){
+                for(int y = j; j < 7; j++){
+                    possibleI[index] = x;
+                    possibleJ[index] = y;
+                    index++;
+                }
+            }
         }
 };
 
@@ -156,11 +213,34 @@ class King  : public BoardPieces{
     public:
         int possibleI[8];
         int possibleJ[8];
-        void movementCheck(){
-            //king movement check
+        void commonMovementCheck(int i, int j){
+            possibleI[0] = i + 1;
+            possibleJ[0] = j;
+
+            possibleI[1] = i + 1;
+            possibleJ[1] = j + 1;
+
+            possibleI[2] = i + 1;
+            possibleJ[2] = j - 1;
+
+            possibleI[3] = i;
+            possibleJ[3] = j + 1;
+
+            possibleI[4] = i;
+            possibleJ[4] = j - 1;
+
+            possibleI[5] = i - 1;
+            possibleJ[5] = j;
+
+            possibleI[6] = i - 1;
+            possibleJ[6] = j - 1;
+            
+            possibleI[7] = i - 1;
+            possibleJ[7] = j + 1;
         }
 };
 
+//board structure
 struct {
     string tileName[64] = {
         "A8", "B8", "C8", "D8", "E8", "F8", "G8", "H8",
@@ -194,18 +274,64 @@ struct {
     };
 }tilesPosition;
 
+//decleration of functions
 void captureCheck();
 void whiteTurn();
 void blackTurn();
 void printWhiteBoard();
 void printBlackBoard();
-void kingCheck();
+string kingCheck(string kingName);
 
+//main chess board 
 string chessBoard[8][8];
 
+//main function
 int main(){
     return 0;
 }
 
+//definition of functions
+void printWhiteBoard(){
+    cout << "\nWhite's POV: \n\n";
+    for(int i = 0; i < 8; i++){
+        for(int j = 0; j < 8; j++){
+            if(j == 0){
+                cout << " "+ to_string(8 - i) + " ";
+            }
+            cout << chessBoard[i][j];
+            if(j == 2){
+                cout << "\n";
+            }
+        }
+    }
+    cout << "    A   B   C   D   E   F   G   H\n";
+}
 
+void printBlackBoard(){
+    cout << "\nBlack's POV: \n\n";
+    for(int i = 7; i >= 0; i++){
+        for(int j = 7; j >= 0; j++){
+            if(j == 0){
+                cout << " "+ to_string(8 - i) + " ";
+            }
+            cout << chessBoard[i][j];
+            if(j == 2){
+                cout << "\n";
+            }
+        }
+    }
+    cout << "    H   G   F   E   D   C   B   A\n";
+}
+
+string kingCheck(string kingName){
+    string status = "Not Alive";
+    for(int i = 0; i > 8; i++){
+        for(int j = 0; j > 8; j++){
+            if(chessBoard[i][j] == kingName){
+                status = "Alive";
+            }
+        }
+    }
+    return status;
+}
 
