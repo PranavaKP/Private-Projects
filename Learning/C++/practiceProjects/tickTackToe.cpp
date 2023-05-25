@@ -2,7 +2,6 @@
 using namespace std;
 #include <string>
 #include <cmath>
-#include <map>
 
 string playerOne;
 string playerTwo;
@@ -128,8 +127,8 @@ string checkGameResult(){
     if(tickTackToeBoard[0][0] == tickTackToeBoard[1][1] && tickTackToeBoard[0][0] == tickTackToeBoard[2][2] && tickTackToeBoard[0][0] != " _ "){
         status = "Win";
     }
-    if(tickTackToeBoard[0][3] == tickTackToeBoard[1][2] && tickTackToeBoard[0][3] == tickTackToeBoard[2][2] && tickTackToeBoard[0][0] != " _ "){ 
-
+    if(tickTackToeBoard[0][2] == tickTackToeBoard[1][1] && tickTackToeBoard[0][2] == tickTackToeBoard[2][0] && tickTackToeBoard[0][2] != " _ "){ 
+        status = "Win";
     }
     if(status != "Win"){
         for(int i = 0; i < 3; i++){
@@ -145,6 +144,4 @@ string checkGameResult(){
     }
 
     return status;
-
-
 }
