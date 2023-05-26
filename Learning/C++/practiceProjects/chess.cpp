@@ -3,19 +3,26 @@ using namespace std;
 #include <string>
 #include <cmath>
 
+//main chess board 
+string chessBoard[8][8] = {
+    {" BR2 ", " BN2 ", " BB2 ", " BQ0 ", " BK0 ", " BB1 ", " BN1 ", " BR1 "},
+    {" BP8 ", " BP7 ", " BP6 ", " BP5 ", " BP4 ", " BP3 ", " BP2 ", " BP1 "},
+    {" ___ ", " ___ ", " ___ ", " ___ ", " ___ ", " ___ ", " ___ ", " ___ "},
+    {" ___ ", " ___ ", " ___ ", " ___ ", " ___ ", " ___ ", " ___ ", " ___ "},
+    {" ___ ", " ___ ", " ___ ", " ___ ", " ___ ", " ___ ", " ___ ", " ___ "},
+    {" ___ ", " ___ ", " ___ ", " ___ ", " ___ ", " ___ ", " ___ ", " ___ "},
+    {" WP1 ", " WP2 ", " WP3 ", " WP4 ", " WP5 ", " WP6 ", " WP7 ", " WP8 "},
+    {" WR1 ", " WN1 ", " WB1 ", " WQ0 ", " WK0 ", " WB2 ", " WN2 ",  " WR2 "}
+};
+
 //objects and classes
+
 class BoardPieces{
     public:
         string pieceName;
         string color;
-        string type;
         int possibleI;
         int possibleJ;
-        BoardPieces(string x, string y, string z){
-            pieceName = x;
-            color = y;
-            type = z;
-        }
         void blackMovementCheck(int i, int j){
             //empty check
         }
@@ -23,7 +30,6 @@ class BoardPieces{
             //empty check
         }
         void commonMovementCheck(int i, int j){
-
         }
 };
 
@@ -31,6 +37,10 @@ class Pawn : public BoardPieces{
     public:
         int possibleI[3];
         int possibleJ[3];
+        Pawn(string x, string y){
+            pieceName = x;
+            color = y;
+        }
         void blackMovementCheck(int i, int j){
             if(chessBoard[i+1][j] == " __ "){
                 possibleI[0] = i + 1;
@@ -65,6 +75,10 @@ class Rook  : public BoardPieces{
     public:
         int possibleI[14];
         int possibleJ[14];
+        Rook(string x, string y){
+            pieceName = x;
+            color = y;
+        }
         void commonMovementCheck(int i, int j){
             for(int x = 0; x < 7; x++){
                 if(x != i &&  chessBoard[x][j] == " __ "){
@@ -83,9 +97,13 @@ class Rook  : public BoardPieces{
 
 class Knight  : public BoardPieces{
     public:
+        int possibleI[8];
+        int possibleJ[8];
+        Knight(string x, string y){
+            pieceName = x;
+            color = y;
+        }
         void commonMovementCheck(int i, int j){
-            int possibleI[8];
-            int possibleJ[8];
             if(i+2 >= 0 && i+2 < 8 && j+1 >= 0 && j+1 < 8){
                 possibleI[0] = i + 2;
                 possibleJ[0] = j + 1;
@@ -123,9 +141,13 @@ class Knight  : public BoardPieces{
 
 class Bishop  : public BoardPieces{
     public:
+         int possibleI[13];
+        int possibleJ[13];
+        Bishop(string x, string y){
+            pieceName = x;
+            color = y;
+        }
         void commonMovementCheck(int i, int j){
-            int possibleI[13];
-            int possibleJ[13];
             int index = 0;
             for(int x = i; i > 0; i--){
                 for(int y = j; j > 0; j--){
@@ -163,6 +185,10 @@ class Queen  : public BoardPieces{
         int possibleI[27];
         int possibleJ[27];
         int index = 0;
+        Queen(string x, string y){
+            pieceName = x;
+            color = y;
+        }
         void commonMovementCheck(int i, int j){
             //rook movement
             for(int x = 0; x < 7; x++){
@@ -213,28 +239,25 @@ class King  : public BoardPieces{
     public:
         int possibleI[8];
         int possibleJ[8];
+        King(string x, string y){
+            pieceName = x;
+            color = y;
+        }
         void commonMovementCheck(int i, int j){
             possibleI[0] = i + 1;
             possibleJ[0] = j;
-
             possibleI[1] = i + 1;
             possibleJ[1] = j + 1;
-
             possibleI[2] = i + 1;
             possibleJ[2] = j - 1;
-
             possibleI[3] = i;
             possibleJ[3] = j + 1;
-
             possibleI[4] = i;
             possibleJ[4] = j - 1;
-
             possibleI[5] = i - 1;
             possibleJ[5] = j;
-
             possibleI[6] = i - 1;
-            possibleJ[6] = j - 1;
-            
+            possibleJ[6] = j - 1;   
             possibleI[7] = i - 1;
             possibleJ[7] = j + 1;
         }
@@ -272,7 +295,7 @@ struct {
         0,1,2,3,4,5,6,7,
         0,1,2,3,4,5,6,7,
     };
-}tilesPosition;
+}boardStructure;
 
 //decleration of functions
 void captureCheck();
@@ -280,13 +303,13 @@ void whiteTurn();
 void blackTurn();
 void printWhiteBoard();
 void printBlackBoard();
+void declarePieces();
 string kingCheck(string kingName);
-
-//main chess board 
-string chessBoard[8][8];
 
 //main function
 int main(){
+    printWhiteBoard();
+    printBlackBoard();
     return 0;
 }
 
@@ -299,28 +322,28 @@ void printWhiteBoard(){
                 cout << " "+ to_string(8 - i) + " ";
             }
             cout << chessBoard[i][j];
-            if(j == 2){
+            if(j == 7){
                 cout << "\n";
             }
         }
     }
-    cout << "    A   B   C   D   E   F   G   H\n";
+    cout << "    A    B    C    D    E    F    G    H\n";
 }
 
 void printBlackBoard(){
     cout << "\nBlack's POV: \n\n";
-    for(int i = 7; i >= 0; i++){
-        for(int j = 7; j >= 0; j++){
-            if(j == 0){
+    for(int i = 7; i >= 0; i--){
+        for(int j = 7; j >= 0; j--){
+            if(j == 7){
                 cout << " "+ to_string(8 - i) + " ";
             }
             cout << chessBoard[i][j];
-            if(j == 2){
+            if(j == 0){
                 cout << "\n";
             }
         }
     }
-    cout << "    H   G   F   E   D   C   B   A\n";
+    cout << "    H    G    F    E    D    C    B    A\n";
 }
 
 string kingCheck(string kingName){
@@ -334,4 +357,3 @@ string kingCheck(string kingName){
     }
     return status;
 }
-
