@@ -276,8 +276,8 @@ struct {
     string tileName[64] = {
         "A8", "B8", "C8", "D8", "E8", "F8", "G8", "H8",
         "A7", "B7", "C7", "D7", "E7", "F7", "G7", "H7",
-        "A5", "B5", "C5", "D5", "E5", "F5", "G5", "H5",
         "A6", "B6", "C6", "D6", "E6", "F6", "G6", "H6",
+        "A5", "B5", "C5", "D5", "E5", "F5", "G5", "H5",
         "A4", "B4", "C4", "D4", "E4", "F4", "G4", "H4",
         "A3", "B3", "C3", "D3", "E3", "F3", "G3", "H3",
         "A2", "B2", "C2", "D2", "E2", "F2", "G2", "H2",
@@ -390,18 +390,6 @@ void printBlackBoard(){
     cout << "    H    G    F    E    D    C    B    A\n";
 }
 
-bool kingCheck(string kingName){
-    bool alive = 0;
-    for(int i = 0; i > 8; i++){
-        for(int j = 0; j > 8; j++){
-            if(chessBoard[i][j] == kingName){
-                alive = 1;
-            }
-        }
-    }
-    return alive;
-}
-
 void whiteTurn(){
     currentColor = "White";
     oppColor = "Black";
@@ -413,7 +401,7 @@ void whiteTurn(){
     if(pieceName == "null"){
       cout << "You have entered the coordinates for an unvalid piece... Please try again!\n";
       whiteTurn();
-    }else{
+    }else{  
       cout << "You are about to move the piece..." << pieceName << "\n";
       cout << "Please enter the coordinates of the tile you want to move your piece...\n";
       cin >> terminalCoordinate;
@@ -423,15 +411,14 @@ void whiteTurn(){
         whiteTurn();
       }else{
         movePiece();
-        if(kingCheck(" BK0 ") == 1){
+        if(kingCheck(" BK0 ") == 0){
             cout << "You have moved..." << "" << "to the coordinate..." << terminalCoordinate << "\n";
             printWhiteBoard();
-            blackTurn();
+            whiteTurn();
         }else{
             cout << "Checkmate, white wins!";
         }
       }
-
     }
 }
 
@@ -456,7 +443,7 @@ void blackTurn(){
         blackTurn();
       }else{
         movePiece();
-        if(kingCheck(" WK0 ") == 1){
+        if(kingCheck(" WK0 ") == 0){
             cout << "You have moved..." << "" << "to the coordinate..." << terminalCoordinate << "\n";
             printBlackBoard();
             whiteTurn();
@@ -468,21 +455,28 @@ void blackTurn(){
     }
 }
 
+void chessCoordsToNumeric(string coords, int &i, int &j){
+  for(int x = 0; x < 64; x++){
+    if(boardStructure.tileName[x] == coords){
+      i = boardStructure.i[x];
+      j = boardStructure.j[x];
+    }
+  }
+}
+
 int initialCheck(string &pieceName, string color){
+  int x;
+  pieceName = "null";
   chessCoordsToNumeric(initialCoordinate, initialI, initialJ);
   if(chessBoard[initialI][initialJ] != " ___ "){
-    for(int x = 0; x < 32; x++){
-      if(pieceNameToObject.pieceName[x] == pieceName && pieceNameToObject.pieceColor[x] == color){
+    for(x = 0; x < 32; x++){
+      if(pieceNameToObject.pieceName[x] == chessBoard[initialI][initialJ] && pieceNameToObject.pieceColor[x] == color){
         pieceName = chessBoard[initialI][initialJ];
-        return x;
-      }else{
-        pieceName = "null";
-        return -1;
+        break;
       }
     }
   }
-  pieceName = "null";
-  return -1;
+  return x;
 }
 
 void terminalCheck(){
@@ -530,6 +524,8 @@ void switchCaseCheck(int maxX, int arrayI[], int arrayJ[]){
       break;
     }
   }
+  terminalI = -1;
+  terminalJ = -1;
 }
 
 void captureCheck(){
@@ -552,11 +548,16 @@ void movePiece(){
   chessBoard[terminalI][terminalJ] = pieceName;
 }
 
-void chessCoordsToNumeric(string coords, int &i, int &j){
-  for(int x = 0; x < 64; x++){
-    if(boardStructure.tileName[x] == coords){
-      i = boardStructure.i[x];
-      j = boardStructure.j[x];
+bool kingCheck(string kingName){
+    bool alive = 0;
+    for(int i = 0; i > 8; i++){
+        for(int j = 0; j > 8; j++){
+            if(chessBoard[i][j] == kingName){
+                alive = 1;
+            }
+        }
     }
-  }
+    return alive;
 }
+
+
