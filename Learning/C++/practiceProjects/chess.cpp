@@ -610,6 +610,3 @@ bool kingCheck(string kingName){
     }
     return alive;
 }
-
-
-
