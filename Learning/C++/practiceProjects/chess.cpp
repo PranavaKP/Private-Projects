@@ -311,13 +311,13 @@ struct{
   //name of all pieces
   string pieceName[32] = {" BP8 ", " BP7 ", " BP6 ", " BP5 ", " BP4 ", " BP3 ", " BP2 ", " BP1 ",
                           " WP1 ", " WP2 ", " WP3 ", " WP4 ", " WP5 ", " WP6 ", " WP7 ", " WP8 ",
-                          " BR2 ", " BN2 ", " BB2 ", " BQ0 ", " BK0 ", " BB1 ", " BN1 ", " BR1 "
+                          " BR2 ", " BN2 ", " BB2 ", " BQ0 ", " BK0 ", " BB1 ", " BN1 ", " BR1 ",
                           " WR1 ", " WN1 ", " WB1 ", " WQ0 ", " WK0 ", " WB2 ", " WN2 ", " WR2 "};
   //piece type number classification
   int pieceClassification[32] = {0 , 0 , 0 , 0 , 0 , 0 , 0 , 0,
                                  1 , 1 , 1 , 1 , 1 , 1 , 1 , 1,
                                  2 , 3 , 4 , 5 , 6 , 4 , 3 , 2,
-                                 2 , 3 , 4 , 5 , 6 , 4 , 3 , 2,};
+                                 2 , 3 , 4 , 5 , 6 , 4 , 3 , 2};
   //piece color classification
   string pieceColor[32] = {"Black", "Black", "Black", "Black", "Black", "Black", "Black", "Black",
                            "White", "White", "White", "White", "White", "White", "White", "White",
@@ -344,7 +344,6 @@ void printWhiteBoard();
 void printBlackBoard();
 int initialCheck(string &pieceName, string color);
 void terminalCheck();
-void switchCaseCheck(int maxX, int arrayI[], int arrayJ[]);
 void chessCoordsToNumeric(string coords, int &i, int &j);
 bool kingCheck(string kingName);
 void movePiece();
@@ -399,7 +398,7 @@ void whiteTurn(){
     cin >> initialCoordinate;
     objNumberIndex = initialCheck(pieceName, currentColor);
     if(pieceName == "null"){
-      cout << "You have entered the coordinates for an unvalid piece... Please try again!\n";
+      cout << "You have entered the coordinates for an unvalid piece... Please try again! \n";
       whiteTurn();
     }else{  
       cout << "You are about to move the piece..." << pieceName << "\n";
@@ -407,14 +406,14 @@ void whiteTurn(){
       cin >> terminalCoordinate;
       terminalCheck();
       if(terminalI == -1 || terminalJ == -1){
-        cout << "You have moved your piece to an invalid space...Please try again!";
+        cout << "You have moved your piece to an invalid space...Please try again! \n";
         whiteTurn();
       }else{
         movePiece();
         if(kingCheck(" BK0 ") == 0){
             cout << "You have moved..." << "" << "to the coordinate..." << terminalCoordinate << "\n";
             printWhiteBoard();
-            whiteTurn();
+            blackTurn();
         }else{
             cout << "Checkmate, white wins!";
         }
@@ -431,15 +430,15 @@ void blackTurn(){
     cin >> initialCoordinate;
     objNumberIndex = initialCheck(pieceName, currentColor);
     if(pieceName == "null"){
-      cout << "You have entered the coordinates for an unvalid piece... Please try again!\n";
+      cout << "You have entered the coordinates for an unvalid piece... Please try again! \n";
       blackTurn();
-    }else{
+    }else{  
       cout << "You are about to move the piece..." << pieceName << "\n";
       cout << "Please enter the coordinates of the tile you want to move your piece...\n";
       cin >> terminalCoordinate;
       terminalCheck();
       if(terminalI == -1 || terminalJ == -1){
-        cout << "You have moved your piece to an invalid space...Please try again!";
+        cout << "You have moved your piece to an invalid space...Please try again! \n";
         blackTurn();
       }else{
         movePiece();
@@ -451,7 +450,6 @@ void blackTurn(){
             cout << "Checkmate, black wins!";
         }
       }
-
     }
 }
 
@@ -486,46 +484,98 @@ void terminalCheck(){
   if(objNumber == 0){
     Pawn BlackPawn;
     BlackPawn.blackMovementCheck(initialI, initialJ);
-    switchCaseCheck(3, BlackPawn.possibleI, BlackPawn.possibleJ);
+    for(int x = 0; x < 3; x++){
+      if(BlackPawn.possibleI[x] == terminalI && BlackPawn.possibleJ[x] == terminalJ){
+        captureCheck();
+        break;
+      }
+      if(x == 2){
+        terminalI = -1;
+        terminalJ = -1;
+      }
+    }
   }else if(objNumber == 1){
     Pawn WhitePawn;
     WhitePawn.whiteMovementCheck(initialI, initialJ);
-    switchCaseCheck(3, WhitePawn.possibleI, WhitePawn.possibleJ);
+    for(int x = 0; x < 3; x++){
+      if(WhitePawn.possibleI[x] == terminalI && WhitePawn.possibleJ[x] == terminalJ){
+        captureCheck();
+        break;
+      }
+      if(x == 2){
+        terminalI = -1;
+        terminalJ = -1;
+      }
+    }
   }else if(objNumber == 2){
     Rook RookPiece;
     RookPiece.rookMovementCheck(initialI, initialJ);
-    switchCaseCheck(14, RookPiece.possibleI, RookPiece.possibleJ);
+    for(int x = 0; x < 14; x++){
+      if(RookPiece.possibleI[x] == terminalI && RookPiece.possibleJ[x] == terminalJ){
+        captureCheck();
+        break;
+      }
+      if(x == 13){
+        terminalI = -1;
+        terminalJ = -1;
+      }
+    }
   }else if(objNumber == 3){
     Knight KnightPiece;
     KnightPiece.knightMovementCheck(initialI, initialJ);
-    switchCaseCheck(8, KnightPiece.possibleI, KnightPiece.possibleJ);
+    for(int x = 0; x < 8; x++){
+      if(KnightPiece.possibleI[x] == terminalI && KnightPiece.possibleJ[x] == terminalJ){
+        captureCheck();
+        break;
+      }
+      if(x == 7){
+        terminalI = -1;
+        terminalJ = -1;
+      }
+    }
   }else if(objNumber == 4){
     Bishop BishopPiece;
     BishopPiece.bishopMovementCheck(initialI, initialJ);
-    switchCaseCheck(13, BishopPiece.possibleI, BishopPiece.possibleJ);
+    for(int x = 0; x < 13; x++){
+      if(BishopPiece.possibleI[x] == terminalI && BishopPiece.possibleJ[x] == terminalJ){
+        captureCheck();
+        break;
+      }
+      if(x == 12){
+        terminalI = -1;
+        terminalJ = -1;
+      }
+    }
   }else if(objNumber == 5){
     Queen QueenPiece;
     QueenPiece.queenMovementCheck(initialI, initialJ);
-    switchCaseCheck(27, QueenPiece.possibleI, QueenPiece.possibleJ);
+    for(int x = 0; x < 27; x++){
+      if(QueenPiece.possibleI[x] == terminalI && QueenPiece.possibleJ[x] == terminalJ){
+        captureCheck();
+        break;
+      }
+      if(x == 26){
+        terminalI = -1;
+        terminalJ = -1;
+      }
+    }
   }else if(objNumber == 6){
     King KingPiece;
     KingPiece.kingMovementCheck(initialI, initialJ);
-    switchCaseCheck(8, KingPiece.possibleI, KingPiece.possibleJ);
+    for(int x = 0; x < 8; x++){
+      if(KingPiece.possibleI[x] == terminalI && KingPiece.possibleJ[x] == terminalJ){
+        captureCheck();
+        break;
+      }
+      if(x == 7){
+        terminalI = -1;
+        terminalJ = -1;
+      }
+    }
   }else{
     terminalI = -1;
     terminalJ = -1;
   }
-}
-
-void switchCaseCheck(int maxX, int arrayI[], int arrayJ[]){
-  for(int x = 0; x < maxX; x++){
-    if(arrayI[x] == terminalI && arrayJ[x] == terminalJ){
-      captureCheck();
-      break;
-    }
-  }
-  terminalI = -1;
-  terminalJ = -1;
 }
 
 void captureCheck(){
@@ -536,6 +586,7 @@ void captureCheck(){
         if(pieceNameToObject.pieceColor[x] != oppColor){
           terminalI = -1;
           terminalJ = -1;
+          break;
         }
       }
     }
@@ -559,5 +610,6 @@ bool kingCheck(string kingName){
     }
     return alive;
 }
+
 
 
