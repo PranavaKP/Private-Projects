@@ -50,20 +50,32 @@ private:
 
 public:
   // possible coords
-  int possibleI[3];
-  int possibleJ[3];
+  int possibleI[4];
+  int possibleJ[4];
   // functions to calculate possible coords
   void blackMovementCheck(int i, int j) {
     verticalMovement(i + 1, j);
     diagonalMovement1(i + 1, j + 1);
     diagonalMovement2(i + 1, j - 1);
+    if(i == 1 && chessBoard[2][j] == " - " && chessBoard[3][j] == " - "){
+      possibleI[3] = i + 2;
+      possibleJ[3] = j;
+    }else{
+      exceptionSetter(3);
+    }
   }
   void whiteMovementCheck(int i, int j) {
     verticalMovement(i - 1, j);
     diagonalMovement1(i - 1, j + 1);
     diagonalMovement2(i - 1, j - 1);
+    if(i == 6  && chessBoard[5][j] == " - " && chessBoard[4][j] == " - "){
+      possibleI[3] = i - 2;
+      possibleJ[3] = j;
+    }else{
+      exceptionSetter(3);
+    }
   }
-};
+}; //done
 
 class Rook {
 private:
@@ -130,7 +142,7 @@ public:
       horizontalCheck(i, y);
     }
   }
-};
+}; //done
 
 class Knight {
 private:
@@ -162,7 +174,7 @@ public:
     compareValue(i - 2, j + 1, 6);
     compareValue(i - 1, j + 2, 7);
   }
-};
+}; //done
 
 class Bishop {
 private:
@@ -224,24 +236,139 @@ public:
     }
     reset(i, j);
     while (x < 7 && y < 7) {
-      checkValues(x + 1, x + 1);
+      checkValues(x + 1, y + 1);
       x++;
       y++;
     }
     if (index != 12) {
       for (int a = index; a < 13; a++) {
         exceptionSetter();
+        index++;
       }
     }
   }
-};
+}; //done
 
-class Queen {
+class Queen{
+private:
+  int index = 0;
+  bool status;
+  int x;
+  int y;
+  void exceptionSetter() {
+    possibleI[index] = -1;
+    possibleJ[index] = -1;
+  }
+  void reset(int i, int j) {
+    status = 1;
+    x = i;
+    y = j;
+  }
+  void checkValues(int x, int y) {
+    if (chessBoard[x][y] == " - ") {
+      setValues(x, y);
+    } else {
+      setValues(x, y);
+      status = 0;
+    }
+  }
+  void setValues(int x, int y) {
+    if (status == 1) {
+      possibleI[index] = x;
+      possibleJ[index] = y;
+    } else {
+      exceptionSetter();
+    }
+    index++;
+  }
+  void verticalCheck(int x, int j) {
+    if (chessBoard[x][j] == " - ") {
+      verticalSet(x, j);
+    } else {
+      verticalSet(x, j);
+      status = 0;
+    }
+  }
+  void horizontalCheck(int i, int y) {
+    if (chessBoard[i][y] == " - ") {
+      horizontalSet(i, y);
+    } else {
+      horizontalSet(i, y);
+      status = 0;
+    }
+  }
+  void verticalSet(int x, int j) {
+    if (status == 1) {
+      possibleI[index] = x;
+      possibleJ[index] = j;
+    } else {
+      possibleI[index] = -1;
+      possibleJ[index] = -1;
+    }
+    index++;
+  }
+  void horizontalSet(int i, int y) {
+    if (status == 1) {
+      possibleI[index] = i;
+      possibleJ[index] = y;
+    } else {
+      possibleI[index] = -1;
+      possibleJ[index] = -1;
+    }
+    index++;
+  }
 public:
   int possibleI[27];
   int possibleJ[27];
-  void queenMovementCheck(int i, int j) {}
-};
+  void queenMovementCheck(int i, int j) {
+    reset(i, j);
+    while (x > 0 && y > 0) {
+      checkValues(x - 1, y - 1);
+      x--;
+      y--;
+    }
+    reset(i, j);
+    while (x > 0 && y < 7) {
+      checkValues(x - 1, y + 1);
+      x--;
+      y++;
+    }
+    reset(i, j);
+    while (x < 7 && y > 0) {
+      checkValues(x + 1, y - 1);
+      x++;
+      y--;
+    }
+    reset(i, j);
+    while (x < 7 && y < 7) {
+      checkValues(x + 1, y + 1);
+      x++;
+      y++;
+    }
+    if (index != 12) {
+      for (int a = index; a < 13; a++) {
+        exceptionSetter();
+        index++;
+      }
+    }
+    status = 1;
+    for (int x = i + 1; x < 8; x++) {
+      verticalCheck(x, j);
+    }
+    status = 1;
+    for (int x = i - 1; x > -1; x--) {
+      verticalCheck(x, j);
+    }
+    status = 1;
+    for (int y = j + 1; y < 8; y++) {
+      horizontalCheck(i, y);
+    }
+    status = 1;
+    for (int y = j - 1; y > -1; y--) {
+      horizontalCheck(i, y);
+    }
+  }
+}; //done
 
 class King {
 public:
@@ -267,7 +394,7 @@ public:
     possibleI[7] = i - 1;
     possibleJ[7] = j + 1;
   }
-};
+}; //done
 
 // board structures
 struct {
@@ -493,13 +620,13 @@ void terminalCheck() {
   if (objNumber == 0) {
     Pawn BlackPawn;
     BlackPawn.blackMovementCheck(initialI, initialJ);
-    for (int x = 0; x < 3; x++) {
+    for (int x = 0; x < 4; x++) {
       if (BlackPawn.possibleI[x] == terminalI &&
           BlackPawn.possibleJ[x] == terminalJ) {
         captureCheck();
         break;
       }
-      if (x == 2) {
+      if (x == 3) {
         terminalI = -1;
         terminalJ = -1;
       }
@@ -507,13 +634,13 @@ void terminalCheck() {
   } else if (objNumber == 1) {
     Pawn WhitePawn;
     WhitePawn.whiteMovementCheck(initialI, initialJ);
-    for (int x = 0; x < 3; x++) {
+    for (int x = 0; x < 4; x++) {
       if (WhitePawn.possibleI[x] == terminalI &&
           WhitePawn.possibleJ[x] == terminalJ) {
         captureCheck();
         break;
       }
-      if (x == 2) {
+      if (x == 3) {
         terminalI = -1;
         terminalJ = -1;
       }
