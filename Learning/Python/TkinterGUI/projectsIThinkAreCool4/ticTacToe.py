@@ -71,6 +71,16 @@ def bttnAction():
   else:
     print('Error')
 
+def clickAction(tileName):
+  global inputSpace
+  inputSpace = tileName
+  if currentPlayer == "Player One":
+    p1Action()
+  elif currentPlayer == "Player Two":
+    p2Action()
+  else:
+    print('Error')
+
 def p1Action():
   i = -1
   j = -1
@@ -179,15 +189,15 @@ gameBoardCanvas.create_window((80, 30), window=ttk.Label(gameBoard, text="A", fo
 gameBoardCanvas.create_window((160, 30), window=ttk.Label(gameBoard, text="B", font=9))
 gameBoardCanvas.create_window((240, 30), window=ttk.Label(gameBoard, text="C", font=9))
 
-gameBoardCanvas.create_window((80, 70), window=ttk.Label(gameBoard, text="A1", font=9, textvariable=a1tk))
-gameBoardCanvas.create_window((80, 140), window=ttk.Label(gameBoard, text="A2", font=9, textvariable=a2tk))
-gameBoardCanvas.create_window((80, 210), window=ttk.Label(gameBoard, text="A3", font=9, textvariable=a3tk))
-gameBoardCanvas.create_window((160, 70), window=ttk.Label(gameBoard, text="B1", font=9, textvariable=b1tk))
-gameBoardCanvas.create_window((160, 140), window=ttk.Label(gameBoard, text="B2", font=9, textvariable=b2tk))
-gameBoardCanvas.create_window((160, 210), window=ttk.Label(gameBoard, text="B3", font=9, textvariable=b3tk))
-gameBoardCanvas.create_window((240, 70), window=ttk.Label(gameBoard, text="C1", font=9, textvariable=c1tk))
-gameBoardCanvas.create_window((240, 140), window=ttk.Label(gameBoard, text="C2", font=9, textvariable=c2tk))
-gameBoardCanvas.create_window((240, 210), window=ttk.Label(gameBoard, text="C3", font=9, textvariable=c3tk))
+a1 = gameBoardCanvas.create_window((80, 70), window=ttk.Label(gameBoard, text="A1", font=9, textvariable=a1tk))
+a2 = gameBoardCanvas.create_window((80, 140), window=ttk.Label(gameBoard, text="A2", font=9, textvariable=a2tk))
+a3 = gameBoardCanvas.create_window((80, 210), window=ttk.Label(gameBoard, text="A3", font=9, textvariable=a3tk))
+b1 = gameBoardCanvas.create_window((160, 70), window=ttk.Label(gameBoard, text="B1", font=9, textvariable=b1tk))
+b2 = gameBoardCanvas.create_window((160, 140), window=ttk.Label(gameBoard, text="B2", font=9, textvariable=b2tk))
+b3 = gameBoardCanvas.create_window((160, 210), window=ttk.Label(gameBoard, text="B3", font=9, textvariable=b3tk))
+c1 = gameBoardCanvas.create_window((240, 70), window=ttk.Label(gameBoard, text="C1", font=9, textvariable=c1tk))
+c2 = gameBoardCanvas.create_window((240, 140), window=ttk.Label(gameBoard, text="C2", font=9, textvariable=c2tk))
+c3 = gameBoardCanvas.create_window((240, 210), window=ttk.Label(gameBoard, text="C3", font=9, textvariable=c3tk))
 
 #userInput Tkinter variable
 userTurnDisplayTk = tk.StringVar(value="Current Player")
@@ -211,6 +221,17 @@ userEnterBttn.pack()
 resetBttn = ttk.Button(userInput, text='Reset', command=resetFunc)
 resetBttn['state'] = 'disabled'
 resetBttn.pack()
+
+#events
+gameBoardCanvas.tag_bind(a1,'<Button-1>', lambda event: clickAction('A1'))
+gameBoardCanvas.tag_bind(a2,'<Button-1>', lambda event: clickAction('A2'))
+gameBoardCanvas.tag_bind(a3,'<Button-1>', lambda event: clickAction('A3'))
+gameBoardCanvas.tag_bind(b1,'<Button-1>', lambda event: clickAction('B1'))
+gameBoardCanvas.tag_bind(b2,'<Button-1>', lambda event: clickAction('B2'))
+gameBoardCanvas.tag_bind(b3,'<Button-1>', lambda event: clickAction('B3'))
+gameBoardCanvas.tag_bind(c1,'<Button-1>', lambda event: clickAction('C1'))
+gameBoardCanvas.tag_bind(c2,'<Button-1>', lambda event: clickAction('C2'))
+gameBoardCanvas.tag_bind(c3,'<Button-1>', lambda event: clickAction('C3'))
 
 printBoard()
 playerOneTurn()

@@ -3,11 +3,15 @@ print("Hello World!!!")
 
 #variables: can not start with a number and cant have spaces or dashes in it
 hi = 5
-hellow = "Bonjour!"
+hello = "Bonjour!"
 
+#multi line stuff
 """
 This is a multiline comment
 """
+
+print("""This is a 
+      multi line string""")
 
 #Camal Case var
 exampleVar = 1
@@ -18,7 +22,7 @@ example_var = 3
 
 #casting = specifically telling program something is of a certain type of data
 str0 = str(3)
-str1= str(hey)
+str1= str("hey")
 int0 = int(3)
 float0 = float(3.5)
 complex0 = complex(1j)
@@ -43,7 +47,7 @@ dict0 = {"name" : "Pranav", "age" : "15"}
 #set: cant have multiple of same elemetns and items are of no order
 set0 = {"apple", "banana"}
 
-#frozenset: cant have multiple of same lements and items are of no order and set is immutable/tuple
+#frozenset: cant have multiple of same elments and items are of no order and set is immutable/tuple
 frozenset0 = ({"hi", "hey"})
 
 #convert number types
@@ -82,5 +86,5 @@ print("My favorite fruits are "+ fruit1 + fruit2 + fruit3)
 import random
 print(random.randrange(1,10))
 
-#global variables can be used anywhere even if declared in functions or loops or if statements
-global variable = 8
+#global variables can be used anywhere even if declared in functions or loops or if statements but they have to be declared without a value i believe
+global globalVar

@@ -1,33 +1,31 @@
 #python arithmetic opperators
 
     #addition
-    print(1 + 1)
+print(1 + 1)
     #subtraction
-    print(1 - 1)
+print(1 - 1)
     #multiplication
-    print(1 * 1)
+print(1 * 1)
     #division
-    print(1 / 1)
+print(1 / 1)
     #modulus
-    print(1 % 1)
+print(1 % 1)
     #exponential
-    print(1 ** 1)
+print(1 ** 1)
     #floor division
-    print(1 // 1)
+print(1 // 1)
 
 #python assignment opperators
 
     # "="
-    x = 5
-    print(x)
-    y = 5
-    print(y)
-
+x = 5
+y = 5
+print(x)
     # "+="
-    x += 3
-    print(x)
-    y = y + 3
-    print(y)
+x += 3
+print(x)
+y = y + 3
+print(y)
     
     # "arithmetic/bitwise="
     # +=, -=, *=, /=, %=, //=, **=, &=, |=, ^=, >>=, <<= 
@@ -59,10 +57,12 @@
     
 #python bitwise operators
 
-# & - sets each bit to 1 if both bits are 1
-# | - sets each bit to 1 if one of two bits is 1
-# ^ - sets each bit to 1 if only one of two bits is 1
-# ~ - inverts all the bits
-# << - shift left by pushing zeros in from the right and let the leftmost bits fall off
-# >> - shift right by pushing copies of the leftmost bit in from the left and let the right most bits fall off
+    # & - sets each bit to 1 if both bits are 1
+    # | - sets each bit to 1 if one of two bits is 1
+    # ^ - sets each bit to 1 if only one of two bits is 1
+    # ~ - inverts all the bits
+    # << - shift left by pushing zeros in from the right and let the leftmost bits fall off
+    # >> - shift right by pushing copies of the leftmost bit in from the left and let the right most bits fall off
 
+#other opperators
+    # in - used to check if a value is inside a sequence of data or just data in general
