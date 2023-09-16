@@ -75,7 +75,7 @@ public:
       exceptionSetter(3);
     }
   }
-}; //done
+};
 
 class Rook {
 private:
@@ -142,7 +142,7 @@ public:
       horizontalCheck(i, y);
     }
   }
-}; //done
+}; 
 
 class Knight {
 private:
@@ -174,7 +174,7 @@ public:
     compareValue(i - 2, j + 1, 6);
     compareValue(i - 1, j + 2, 7);
   }
-}; //done
+};
 
 class Bishop {
 private:
@@ -247,7 +247,7 @@ public:
       }
     }
   }
-}; //done
+}; 
 
 class Queen{
 private:
@@ -368,7 +368,7 @@ public:
       horizontalCheck(i, y);
     }
   }
-}; //done
+}; 
 
 class King {
 public:
@@ -394,7 +394,7 @@ public:
     possibleI[7] = i - 1;
     possibleJ[7] = j + 1;
   }
-}; //done
+}; 
 
 // board structures
 struct {
@@ -455,7 +455,6 @@ string initialCoordinate;
 string terminalCoordinate;
 string pieceName;
 string currentColor;
-string oppColor;
 int objNumberIndex;
 int initialI;
 int initialJ;
@@ -467,7 +466,7 @@ void whiteTurn();
 void blackTurn();
 void printWhiteBoard();
 void printBlackBoard();
-int initialCheck(string &pieceName, string color);
+int initialCheck();
 void terminalCheck();
 void chessCoordsToNumeric(string coords, int &i, int &j);
 bool kingCheck(string kingName);
@@ -516,12 +515,11 @@ void printBlackBoard() {
 
 void whiteTurn() {
   currentColor = "White";
-  oppColor = "Black";
   cout << "It is white's turn!\n";
   printWhiteBoard();
   cout << "Please enter the coordinates of piece you want to move...\n";
   cin >> initialCoordinate;
-  objNumberIndex = initialCheck(pieceName, currentColor);
+  objNumberIndex = initialCheck();
   if (pieceName == "null") {
     cout << "You have entered the coordinates for an unvalid piece... Please "
             "try again! \n";
@@ -553,12 +551,11 @@ void whiteTurn() {
 
 void blackTurn() {
   currentColor = "Black";
-  oppColor = "White";
   cout << "It is black's turn!\n";
   printBlackBoard();
   cout << "Please enter the coordinates of piece you want to move...\n";
   cin >> initialCoordinate;
-  objNumberIndex = initialCheck(pieceName, currentColor);
+  objNumberIndex = initialCheck();
   if (pieceName == "null") {
     cout << "You have entered the coordinates for an unvalid piece... Please "
             "try again! \n";
@@ -588,6 +585,21 @@ void blackTurn() {
   }
 }
 
+int initialCheck() {
+  int x;
+  pieceName = "null";
+  chessCoordsToNumeric(initialCoordinate, initialI, initialJ);
+  if (chessBoard[initialI][initialJ] != " - ") {
+    for (x = 0; x < 32; x++) {
+      if (pieceNameToObject.pieceName[x] == chessBoard[initialI][initialJ] && pieceNameToObject.pieceColor[x] == currentColor) {
+        pieceName = chessBoard[initialI][initialJ];
+        break;
+      }
+    }
+  }
+  return x;
+}
+
 void chessCoordsToNumeric(string coords, int &i, int &j) {
   for (int x = 0; x < 64; x++) {
     if (boardStructure.tileName[x] == coords) {
@@ -595,22 +607,6 @@ void chessCoordsToNumeric(string coords, int &i, int &j) {
       j = boardStructure.j[x];
     }
   }
-}
-
-int initialCheck(string &pieceName, string color) {
-  int x;
-  pieceName = "null";
-  chessCoordsToNumeric(initialCoordinate, initialI, initialJ);
-  if (chessBoard[initialI][initialJ] != " - ") {
-    for (x = 0; x < 32; x++) {
-      if (pieceNameToObject.pieceName[x] == chessBoard[initialI][initialJ] &&
-          pieceNameToObject.pieceColor[x] == color) {
-        pieceName = chessBoard[initialI][initialJ];
-        break;
-      }
-    }
-  }
-  return x;
 }
 
 void terminalCheck() {
@@ -726,7 +722,7 @@ void captureCheck() {
   if (terminalTileName != " - ") {
     for (int x = 0; x < 32; x++) {
       if (pieceNameToObject.pieceName[x] == terminalTileName) {
-        if (pieceNameToObject.pieceColor[x] != oppColor) {
+        if (pieceNameToObject.pieceColor[x] == currentColor) {
           terminalI = -1;
           terminalJ = -1;
           break;
